@@ -1,24 +1,20 @@
 # 숫자 야구 게임
 
 ## 🔍 진행 방법
-***
 * 미션은 **기능 요구사항, 프로그래밍 요구사항, 과제 진행 요구사항** 세 가지로 구성되어 있다.
 * 요구사항에 대한 구현을 완료한 후 자신의 github 아이디에 해당하는 브랜치에 Pull Request(이하 PR)를 통해 과제를 제출한다.
 
 ## 📖 과제 제출 과정
-***
 * 미션 구현을 완료한 후 GitHub을 통해 제출해야 한다.
   * GitHub을 활용한 제출방법은 [프리코스 과제 제출](https://github.com/next-step/nextstep-docs/tree/master/precourse) 문서를 참고해 제출한다. 
 * GitHub에 미션을 제출한후 [우테캠 Pro지원 플랫폼](https://apply.techcourse.co.kr/)을 통해 과제를 최종 제출한다.
 * Pull Request만 보내고, 지원 플랫폼에서 과제를 제출하지 않으면 최종 제출하지 않은 것으로 처리되니 주의한다.
 
 ## ❌ 과제 제출 전 체크리스트 - 0점 방지
-***
 * 터미널에서 `java -version`을 실행해 자바 8인지 확인한다. 또는 Eclipse, IntelliJ IDEA와 같은 IDE의 자바 8로 실행하는지 확인한다.
 * 터미널에서 맥 또는 리눅스 사용자의 경우 `./gradlew clean test`, 윈도우 사용자의 경우 `gradlew.bat clean test` 명령을 실행했을 때 모든 테스트가 통과하는지 확인한다.
 
 ## 🚀 기능 요구사항
-***
 기본적으로 1부터 9까지 서로 다른 수로 이루어진 3자리의 수를 맞추는 게임이다.
 
 * 같은 수가 같은 자리에 있으면 스트라이크, 다른 자리에 있으면 볼, 같은 수가 전혀 없으면 낫싱이란 힌트를 얻고, <br> 
@@ -61,7 +57,6 @@
 > 3개의 숫자를 모두 맞추셨습니다! 게임종료
 
 ## 💻 프로그래밍 요구사항
-***
 * 프로그램을 실행하는 시작점은 Application의 main()이다.
 * JDK 8 버전에서 실행 가능해야 한다. JDK 8에서 정상 동작하지 않을 경우 0점 처리한다.
 * JDK에서 제공하는 Random 및 Scanner API 대신 camp.nextstep.edu.missionutils에서 제공하는 Randoms 및 Console API를 사용하여 구현해야 한다.
@@ -81,8 +76,7 @@
 * 프로그램 구현을 완료했을 때 src/test/java 폴더의 baseball.ApplicationTest에 있는 2개의 Test Case가 성공해야 한다. <br>
  테스트가 실패할 경우 0점 처리한다.
 
-## ✍🏻 과제 진행 요구사항 
-***
+## ✍🏻 과제 진행 요구사항
 * 미션은 https://github.com/next-step/java-baseball-precourse 저장소를 fork/clone해 시작한다.
 * 기능을 구현하기 전에 docs/README.md 파일에 구현할 기능 목록을 정리해 추가한다.
 * git의 commit 단위는 앞 단계에서 docs/README.md 파일에 정리한 기능 목록 단위 또는 의미있는 단위로 Commit
