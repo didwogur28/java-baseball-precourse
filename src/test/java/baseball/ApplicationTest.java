@@ -4,16 +4,15 @@ import camp.nextstep.edu.missionutils.Randoms;
 import camp.nextstep.edu.missionutils.test.NsTest;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import static camp.nextstep.edu.missionutils.test.Assertions.assertRandomNumberInRangeTest;
-import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class ApplicationTest extends NsTest {
+
     @Test
     void 게임종료_후_재시작() {
         assertRandomNumberInRangeTest(
@@ -25,28 +24,25 @@ class ApplicationTest extends NsTest {
         );
     }
 
+    @Override
+    public void runMain() {
+        Application.main(new String[]{});
+    }
+
     @Test
     void 랜덤_숫자_3개_셋팅() {
         List<Integer> randomNumbers = Randoms.pickUniqueNumbersInRange(1, 9, 3);
         assertThat(randomNumbers.size()).isEqualTo(3);
-
-        assertThat(randomNumbers.get(0)).isEqualTo(randomNumbers.get(1));
-        for(int i=0; i<randomNumbers.size(); i++) {
-            System.out.println(randomNumbers.get(i));
-        }
     }
 
     @Test
     void 해당값_포함여부_테스트() {
 
-        List<Integer> randomNumbers = Arrays.asList(1,2,3);
+        List<Integer> randomNumbers = Randoms.pickUniqueNumbersInRange(1, 9, 3);
+        System.out.println(randomNumbers.get(0)+" "+randomNumbers.get(1)+" "+randomNumbers.get(2));
+
         List<Integer> inputNumbers = Arrays.asList(1,7,4);
 
         assertTrue(randomNumbers.contains(inputNumbers.get(0)));
-    }
-
-    @Override
-    public void runMain() {
-        Application.main(new String[]{});
     }
 }
