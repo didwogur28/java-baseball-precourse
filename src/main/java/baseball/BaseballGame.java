@@ -29,7 +29,31 @@ public class BaseballGame {
         System.out.println("숫자를 입력해주세요 : ");
         String usrInputNum = Console.readLine();
 
+        this.usrNum = usrNumToList(usrInputNum);
     }
 
+    public List<Integer> usrNumToList(String arg) {
 
+        List<String> usrStringArr = Arrays.asList(arg.split(""));
+        List<Integer> usrIntArr = new ArrayList<>();
+
+        for(int i=0; i<usrStringArr.size(); i++) {
+            usrIntArr.add(numCheck(usrStringArr.get(i)));
+        }
+
+        return usrIntArr;
+    }
+
+    public int numCheck(String arg) {
+
+        int chgNum = 0;
+
+        try {
+            chgNum = Integer.parseInt(arg);
+        } catch (Exception e) {
+            throw new IllegalArgumentException("올바른 숫자가 아닙니다. 세자리 숫자를 입력해주세요.");
+        }
+
+        return chgNum;
+    }
 }
