@@ -33,6 +33,28 @@ public class BaseballGame {
         String usrInputNum = Console.readLine();
         this.usrNumArr = usrNumToList(usrInputNum);
         validateChk();
+        compareNum();
+    }
+
+    public void compareNum() {
+        this.strike = 0;
+        this.ball = 0;
+
+        for (int i = 0; i < usrNumArr.size(); i++) {
+            getResult(i);
+        }
+    }
+
+    public void getResult(int i) {
+
+        if (randomNumArr.indexOf(usrNumArr.get(i)) == i) {
+            strike++;
+            return;
+        }
+
+        if (randomNumArr.contains(usrNumArr.get(i))) {
+            ball++;
+        }
     }
 
     public List<Integer> usrNumToList(String arg) {
