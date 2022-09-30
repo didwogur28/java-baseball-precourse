@@ -3,21 +3,21 @@ package baseball;
 import camp.nextstep.edu.missionutils.Console;
 import camp.nextstep.edu.missionutils.Randoms;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public class BaseballGame {
 
-    private List<Integer> randomNum;
-    private List<Integer> usrNum;
+    private List<Integer> randomNumArr;
+    private List<Integer> usrNumArr;
+
+    private StatusCode statusCode;
 
     public BaseballGame() {
         init();
     }
 
     public void init() {
-        randomNum = Randoms.pickUniqueNumbersInRange(1, 9, 3);
+        randomNumArr = Randoms.pickUniqueNumbersInRange(1, 9, 3);
 
         System.out.println("*******************");
         System.out.println("** 게임을 시작합니다 **");
@@ -28,8 +28,8 @@ public class BaseballGame {
 
         System.out.println("숫자를 입력해주세요 : ");
         String usrInputNum = Console.readLine();
-
-        this.usrNum = usrNumToList(usrInputNum);
+        this.usrNumArr = usrNumToList(usrInputNum);
+        validateChk();
     }
 
     public List<Integer> usrNumToList(String arg) {
@@ -51,9 +51,36 @@ public class BaseballGame {
         try {
             chgNum = Integer.parseInt(arg);
         } catch (Exception e) {
-            throw new IllegalArgumentException("올바른 숫자가 아닙니다. 세자리 숫자를 입력해주세요.");
+            throw new IllegalArgumentException(statusCode.NOT_INTEGER_TYPE);
         }
 
         return chgNum;
+    }
+
+    public void validateChk() {
+        Set<Integer> chkDup = new HashSet<>(usrNumArr);
+
+        sizeCheck();
+        containCheck();
+        dupCheck(chkDup);
+    }
+
+    public void sizeCheck() {
+        if(usrNumArr.size() != 3) {
+            throw new IllegalArgumentException(statusCode.ARRAY_SIZE_ERROR);
+        }
+    }
+
+    public void containCheck() {
+        if(usrNumArr.contains(0)) {
+            throw new IllegalArgumentException(statusCode.ARRAY_CONTAIN_ERROR);
+        }
+    }
+
+    public void dupCheck(Set<Integer> chkDup) {
+
+        if(usrNumArr.size() != chkDup.size()) {
+            throw new IllegalArgumentException(statusCode.ARRAY_DUP_ERROR);
+        }
     }
 }
