@@ -7,10 +7,13 @@ import java.util.*;
 
 public class BaseballGame {
 
+    private int strike;
+    private int ball;
+
     private List<Integer> randomNumArr;
     private List<Integer> usrNumArr;
 
-    private StatusCode statusCode;
+    StatusCode CODE = new StatusCode();
 
     public BaseballGame() {
         init();
@@ -26,7 +29,7 @@ public class BaseballGame {
 
     public void playGame() {
 
-        System.out.println("숫자를 입력해주세요 : ");
+        System.out.print("숫자를 입력해주세요 : ");
         String usrInputNum = Console.readLine();
         this.usrNumArr = usrNumToList(usrInputNum);
         validateChk();
@@ -51,7 +54,7 @@ public class BaseballGame {
         try {
             chgNum = Integer.parseInt(arg);
         } catch (Exception e) {
-            throw new IllegalArgumentException(statusCode.NOT_INTEGER_TYPE);
+            throw new IllegalArgumentException(CODE.NOT_INTEGER_TYPE);
         }
 
         return chgNum;
@@ -67,20 +70,20 @@ public class BaseballGame {
 
     public void sizeCheck() {
         if(usrNumArr.size() != 3) {
-            throw new IllegalArgumentException(statusCode.ARRAY_SIZE_ERROR);
+            throw new IllegalArgumentException(CODE.ARRAY_SIZE_ERROR);
         }
     }
 
     public void containCheck() {
         if(usrNumArr.contains(0)) {
-            throw new IllegalArgumentException(statusCode.ARRAY_CONTAIN_ERROR);
+            throw new IllegalArgumentException(CODE.ARRAY_CONTAIN_ERROR);
         }
     }
 
     public void dupCheck(Set<Integer> chkDup) {
 
         if(usrNumArr.size() != chkDup.size()) {
-            throw new IllegalArgumentException(statusCode.ARRAY_DUP_ERROR);
+            throw new IllegalArgumentException(CODE.ARRAY_DUP_ERROR);
         }
     }
 }
