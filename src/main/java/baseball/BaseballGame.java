@@ -14,6 +14,7 @@ public class BaseballGame {
     private List<Integer> usrNumArr;
 
     StatusCode CODE = new StatusCode();
+    ValidateNum validateNum = new ValidateNum();
 
     public BaseballGame() {
         init();
@@ -23,6 +24,7 @@ public class BaseballGame {
         randomNumArr = Randoms.pickUniqueNumbersInRange(1, 9, 3);
 
         System.out.println("*******************");
+        System.out.println(randomNumArr);
         System.out.println("** 게임을 시작합니다 **");
         System.out.println("*******************\n");
     }
@@ -34,6 +36,7 @@ public class BaseballGame {
         this.usrNumArr = usrNumToList(usrInputNum);
         validateChk();
         compareNum();
+        System.out.println(scoreReturn());
     }
 
     public void compareNum() {
@@ -41,11 +44,11 @@ public class BaseballGame {
         this.ball = 0;
 
         for (int i = 0; i < usrNumArr.size(); i++) {
-            getResult(i);
+            getScore(i);
         }
     }
 
-    public void getResult(int i) {
+    public void getScore(int i) {
 
         if (randomNumArr.indexOf(usrNumArr.get(i)) == i) {
             strike++;
@@ -63,49 +66,53 @@ public class BaseballGame {
         List<Integer> usrIntArr = new ArrayList<>();
 
         for(int i=0; i<usrStringArr.size(); i++) {
-            usrIntArr.add(numCheck(usrStringArr.get(i)));
+            usrIntArr.add(validateNum.numCheck(usrStringArr.get(i)));
         }
 
         return usrIntArr;
     }
 
-    public int numCheck(String arg) {
-
-        int chgNum = 0;
-
-        try {
-            chgNum = Integer.parseInt(arg);
-        } catch (Exception e) {
-            throw new IllegalArgumentException(CODE.NOT_INTEGER_TYPE);
-        }
-
-        return chgNum;
-    }
-
     public void validateChk() {
         Set<Integer> chkDup = new HashSet<>(usrNumArr);
 
-        sizeCheck();
-        containCheck();
-        dupCheck(chkDup);
+        validateNum.sizeCheck(usrNumArr);
+        validateNum.containCheck(usrNumArr);
+        validateNum.dupCheck(usrNumArr, chkDup);
     }
 
-    public void sizeCheck() {
-        if(usrNumArr.size() != 3) {
-            throw new IllegalArgumentException(CODE.ARRAY_SIZE_ERROR);
+    public String scoreReturn() {
+
+        if (ball != 0 && strike != 0) {
+            return (ball + "볼" + " , " + strike + "스트라이크");
         }
+        if (ball == 0 && strike != 0) {
+            return (strike + "스트라이크");
+        }
+        if (ball != 0 && strike == 0) {
+            return (ball + "볼");
+        }
+        return ("낫싱");
     }
 
-    public void containCheck() {
-        if(usrNumArr.contains(0)) {
-            throw new IllegalArgumentException(CODE.ARRAY_CONTAIN_ERROR);
-        }
-    }
+    public boolean endGameCheck() {
 
-    public void dupCheck(Set<Integer> chkDup) {
+        if (strike == 3) {
+            System.out.println(CODE.GAME_END);
+            System.out.println(CODE.GAME_RESTART);
 
-        if(usrNumArr.size() != chkDup.size()) {
-            throw new IllegalArgumentException(CODE.ARRAY_DUP_ERROR);
+            String response = Console.readLine();
+
+            if (response.equals("1")) {
+                init();
+                return true;
+            }
+
+            if (response.equals("2")) {
+                return false;
+            }
+            throw new IllegalArgumentException(CODE.GAME_RESTART_ERROR);
         }
+
+        return true;
     }
 }
