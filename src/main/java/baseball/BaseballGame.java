@@ -15,6 +15,7 @@ public class BaseballGame {
 
     StatusCode CODE = new StatusCode();
     ValidateNum validateNum = new ValidateNum();
+    Score score = new Score();
 
     public BaseballGame() {
         init();
@@ -24,7 +25,6 @@ public class BaseballGame {
         randomNumArr = Randoms.pickUniqueNumbersInRange(1, 9, 3);
 
         System.out.println("*******************");
-        System.out.println(randomNumArr);
         System.out.println("** 게임을 시작합니다 **");
         System.out.println("*******************\n");
     }
@@ -34,9 +34,9 @@ public class BaseballGame {
         System.out.print("숫자를 입력해주세요 : ");
         String usrInputNum = Console.readLine();
         this.usrNumArr = usrNumToList(usrInputNum);
-        validateChk();
+        validateNum.validateChk(usrNumArr);
         compareNum();
-        System.out.println(scoreReturn());
+        System.out.println(score.scoreReturn(ball, strike));
     }
 
     public void compareNum() {
@@ -70,28 +70,6 @@ public class BaseballGame {
         }
 
         return usrIntArr;
-    }
-
-    public void validateChk() {
-        Set<Integer> chkDup = new HashSet<>(usrNumArr);
-
-        validateNum.sizeCheck(usrNumArr);
-        validateNum.containCheck(usrNumArr);
-        validateNum.dupCheck(usrNumArr, chkDup);
-    }
-
-    public String scoreReturn() {
-
-        if (ball != 0 && strike != 0) {
-            return (ball + "볼" + " , " + strike + "스트라이크");
-        }
-        if (ball == 0 && strike != 0) {
-            return (strike + "스트라이크");
-        }
-        if (ball != 0 && strike == 0) {
-            return (ball + "볼");
-        }
-        return ("낫싱");
     }
 
     public boolean endGameCheck() {

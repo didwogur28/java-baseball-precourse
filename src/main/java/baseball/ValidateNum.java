@@ -1,11 +1,21 @@
 package baseball;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 public class ValidateNum {
 
     StatusCode CODE = new StatusCode();
+
+    public void validateChk(List<Integer> usrNumArr) {
+
+        Set<Integer> chkDup = new HashSet<>(usrNumArr);
+
+        sizeCheck(usrNumArr);
+        containCheck(usrNumArr);
+        dupCheck(usrNumArr, chkDup);
+    }
 
     public int numCheck(String arg) {
 
