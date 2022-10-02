@@ -12,8 +12,6 @@ public class BaseballGame {
 
     private List<Integer> randomNumArr;
     private List<Integer> usrNumArr;
-
-    StatusCode CODE = new StatusCode();
     ValidateNum validateNum = new ValidateNum();
     Score score = new Score();
 
@@ -75,8 +73,8 @@ public class BaseballGame {
     public boolean endGameCheck() {
 
         if (strike == 3) {
-            System.out.println(CODE.GAME_END);
-            System.out.println(CODE.GAME_RESTART);
+            System.out.println(StatusCode.GAME_END);
+            System.out.println(StatusCode.GAME_RESTART);
 
             String response = Console.readLine();
 
@@ -88,7 +86,7 @@ public class BaseballGame {
             if (response.equals("2")) {
                 return false;
             }
-            throw new IllegalArgumentException(CODE.GAME_RESTART_ERROR);
+            throw new IllegalArgumentException(StatusCode.GAME_RESTART_ERROR);
         }
 
         return true;

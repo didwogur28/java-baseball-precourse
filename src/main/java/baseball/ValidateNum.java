@@ -6,8 +6,6 @@ import java.util.Set;
 
 public class ValidateNum {
 
-    StatusCode CODE = new StatusCode();
-
     public void validateChk(List<Integer> usrNumArr) {
 
         Set<Integer> chkDup = new HashSet<>(usrNumArr);
@@ -24,7 +22,7 @@ public class ValidateNum {
         try {
             chgNum = Integer.parseInt(arg);
         } catch (Exception e) {
-            throw new IllegalArgumentException(CODE.NOT_INTEGER_TYPE);
+            throw new IllegalArgumentException(StatusCode.NOT_INTEGER_TYPE);
         }
 
         return chgNum;
@@ -32,20 +30,20 @@ public class ValidateNum {
 
     public void sizeCheck(List<Integer> usrNumArr) {
         if(usrNumArr.size() != 3) {
-            throw new IllegalArgumentException(CODE.ARRAY_SIZE_ERROR);
+            throw new IllegalArgumentException(StatusCode.ARRAY_SIZE_ERROR);
         }
     }
 
     public void containCheck(List<Integer> usrNumArr) {
         if(usrNumArr.contains(0)) {
-            throw new IllegalArgumentException(CODE.ARRAY_CONTAIN_ERROR);
+            throw new IllegalArgumentException(StatusCode.ARRAY_CONTAIN_ERROR);
         }
     }
 
     public void dupCheck(List<Integer> usrNumArr, Set<Integer> chkDup) {
 
         if(usrNumArr.size() != chkDup.size()) {
-            throw new IllegalArgumentException(CODE.ARRAY_DUP_ERROR);
+            throw new IllegalArgumentException(StatusCode.ARRAY_DUP_ERROR);
         }
     }
 
