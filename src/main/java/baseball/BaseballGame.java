@@ -10,31 +10,33 @@ public class BaseballGame {
     private int strike;
     private int ball;
 
-    private List<Integer> randomNumArr;
+    private Computer computer;
+    private List<Integer> computerNumArr;
     private List<Integer> usrNumArr;
     ValidateNum validateNum = new ValidateNum();
     Score score = new Score();
 
-    public BaseballGame() {
-        init();
-    }
-
     public void init() {
-        randomNumArr = Randoms.pickUniqueNumbersInRange(1, 9, 3);
-
-        System.out.println("*******************");
-        System.out.println("** 게임을 시작합니다 **");
-        System.out.println("*******************\n");
+        this.computer = new Computer();
+        this.computerNumArr = computer.init();
+        playGame();
     }
 
     public void playGame() {
 
-        System.out.print("숫자를 입력해주세요 : ");
-        String usrInputNum = Console.readLine();
-        this.usrNumArr = usrNumToList(usrInputNum);
-        validateNum.validateChk(usrNumArr);
-        compareNum();
-        System.out.println(score.scoreReturn(ball, strike));
+        System.out.println("*******************");
+        System.out.println("** 게임을 시작합니다 **");
+        System.out.println("*******************\n");
+
+        do {
+            System.out.println(computerNumArr);
+            System.out.print("숫자를 입력해주세요 : ");
+            String usrInputNum = Console.readLine();
+            this.usrNumArr = usrNumToList(usrInputNum);
+            validateNum.validateChk(usrNumArr);
+            compareNum();
+            System.out.println(score.scoreReturn(ball, strike));
+        } while (endGameCheck());
     }
 
     public void compareNum() {
@@ -48,12 +50,12 @@ public class BaseballGame {
 
     public void getScore(int i) {
 
-        if (randomNumArr.indexOf(usrNumArr.get(i)) == i) {
+        if (computerNumArr.indexOf(usrNumArr.get(i)) == i) {
             strike++;
             return;
         }
 
-        if (randomNumArr.contains(usrNumArr.get(i))) {
+        if (computerNumArr.contains(usrNumArr.get(i))) {
             ball++;
         }
     }
