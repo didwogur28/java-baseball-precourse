@@ -8,7 +8,9 @@ import java.util.Arrays;
 import java.util.List;
 
 import static camp.nextstep.edu.missionutils.test.Assertions.assertRandomNumberInRangeTest;
+import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class ApplicationTest extends NsTest {
@@ -24,9 +26,12 @@ class ApplicationTest extends NsTest {
         );
     }
 
-    @Override
-    public void runMain() {
-        Application.main(new String[]{});
+    @Test
+    void 예외_테스트() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("1234"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
     }
 
     @Test
@@ -44,5 +49,10 @@ class ApplicationTest extends NsTest {
         List<Integer> inputNumbers = Arrays.asList(1,7,4);
 
         assertTrue(randomNumbers.contains(inputNumbers.get(0)));
+    }
+
+    @Override
+    public void runMain() {
+        Application.main(new String[]{});
     }
 }
